@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+require('dotenv').config()
 const PORT = process.env.PORT || 4000;
 
 require('dotenv').config();
@@ -26,5 +27,29 @@ function callBack(req, res) {
 	res.send('POST received');
 }
 
-app.post('/add', callBack);
+app.post( '/add', callBack );
 
+
+const addNewLocation = ( req, res ) => {
+	const newData = req.body;
+	const location = {
+		title: newData.title,
+		summary: newData.summary,
+		countryCode: newData.countryCode,
+		lat: newData.lat,
+		lng: newData.lng,
+		wikipediaUrl: newData.wikipediaUrl
+	}
+
+	projectData[ location.title ] = location;
+	console.log('received data: ', projectData );
+	return projectData;
+};
+
+const sendAll = ( req, res ) => {
+	console.log( 'project data: ', projectData );
+	res.send( projectData );
+};
+
+app.get( '/all', sendAll );
+app.post('/location', addNewLocation)

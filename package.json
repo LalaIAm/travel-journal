@@ -4,8 +4,8 @@
   "description": "A travel journal made with webpack, scss, and JavaScript",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server-start": "node src/server/server.js",
-    "server-dev": "nodemon src/server/server.js",
+    "server-start": "node -r dotenv/config src/server/server.js",
+    "server-dev": "nodemon -r dotenv/config src/server/server.js",
     "build-prod": "webpack --config webpack.prod.js && webpack --config webpack.server.js",
     "build-dev": "webpack-dev-server --config webpack.dev.js --open && webpack --config webpack.server.js",
     "start": "concurrently \"npm:build-dev\" \"npm:server-dev\""
